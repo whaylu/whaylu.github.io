@@ -31,12 +31,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
 }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+  -webkit-tap-highlight-color: transparent;   /* 关掉移动端点击蓝框 */
 }
 
 body {
@@ -47,11 +47,6 @@ body {
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-button, .pet, .logo {
-  -webkit-user-select: none;
-  user-select: none;
 }
 
 /* ===== 导航栏 ===== */
@@ -316,7 +311,8 @@ button, .pet, .logo {
   box-shadow: var(--shadow-card);
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
               box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 0.35s ease;
+              border-color 0.35s ease,
+              background-color 0.35s ease;
   overflow: hidden;
 }
 
@@ -496,8 +492,6 @@ button, .pet, .logo {
   display: block;
   height: 280px;
   width: auto;
-  user-select: none;
-  -webkit-user-drag: none;
 }
 
 .pet:hover {
@@ -592,7 +586,28 @@ button, .pet, .logo {
   }
 }
 
-/* ==================== 6. 顶部阅读进度条 ==================== */
+/* ==================== 副标题打字机光标 ==================== */
+#typewriter {
+  min-height: 1.7em;   /* 打字 / 退格时保持高度稳定，避免 hero 抖动 */
+}
+
+#typewriter::after {
+  content: "";
+  display: inline-block;
+  width: 1.5px;
+  height: 1.1em;
+  margin-left: 3px;
+  vertical-align: -0.15em;
+  background: currentColor;
+  animation: caretBlink 1s steps(1) infinite;
+}
+
+@keyframes caretBlink {
+  0%, 50%      { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+/* ==================== 顶部阅读进度条 ==================== */
 .progress-bar {
   position: absolute;         /* 相对 navbar 定位，跟着导航走 */
   left: 0;
@@ -605,7 +620,7 @@ button, .pet, .logo {
   border-radius: 0 1px 1px 0; /* 进度条右端一个小圆角，更精致 */
 }
 
-/* ==================== 7. 回到顶部按钮 ==================== */
+/* ==================== 回到顶部按钮 ==================== */
 .back-top {
   position: fixed;
   left: 28px;
@@ -655,7 +670,7 @@ button, .pet, .logo {
   transform: translateY(-3px);
 }
 
-/* ==================== 8. 主题切换按钮 ==================== */
+/* ==================== 主题切换按钮 ==================== */
 .theme-toggle {
   width: 36px;
   height: 36px;
@@ -690,7 +705,7 @@ button, .pet, .logo {
 [data-theme="dark"] .theme-toggle .icon-sun  { display: none; }
 [data-theme="dark"] .theme-toggle .icon-moon { display: block; }
 
-/* ==================== 8b. 暗色主题变量 ==================== */
+/* ==================== 暗色主题变量 ==================== */
 [data-theme="dark"] {
   --bg: #1c1613;
   --bg-deep: #12100d;
@@ -730,7 +745,7 @@ button, .pet, .logo {
   background: rgba(224, 144, 96, 0.12);
 }
 
-/* ==================== 9. 噪点纹理 ==================== */
+/* ==================== 噪点纹理 ==================== */
 body::before {
   content: "";
   position: fixed;
@@ -745,6 +760,40 @@ body::before {
   opacity: 0.045;
 }
 
+/* ==================== 移动端点击反馈清理 ==================== */
+
+/* 点击产生的 focus 轮廓：只在键盘导航时才显示（:focus-visible） */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* 交互元素：禁止长按选中 / 弹出菜单 / 拖影 */
+button,
+.nav-item,
+.theme-toggle,
+.copy-btn,
+.back-top,
+.logo,
+.pet,
+.pet img,
+.pet-bubble,
+[data-ds-say] {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;   /* iOS 长按弹出「拷贝/搜索」菜单 */
+}
+
+/* 图片：禁止拖动和长按菜单（保险起见全站生效） */
+img {
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
 /* ==================== 减少动画偏好 ==================== */
 @media (prefers-reduced-motion: reduce) {
   .reveal {
@@ -756,6 +805,9 @@ body::before {
   }
   .pet:active {
     transform: none;
+  }
+  #typewriter::after {
+    animation: none;
   }
 }
 
@@ -925,33 +977,5 @@ body::before {
   .theme-toggle svg {
     width: 14px;
     height: 14px;
-  }
-}
-
-/* ==================== 副标题打字机光标 ==================== */
-#typewriter {
-  min-height: 1.7em;   /* 打字 / 退格时保持高度稳定，避免 hero 抖动 */
-}
-
-#typewriter::after {
-  content: "";
-  display: inline-block;
-  width: 1.5px;
-  height: 1.1em;
-  margin-left: 3px;
-  vertical-align: -0.15em;
-  background: currentColor;
-  animation: caretBlink 1s steps(1) infinite;
-}
-
-@keyframes caretBlink {
-  0%, 50%   { opacity: 1; }
-  50.01%, 100% { opacity: 0; }
-}
-
-/* 减少动画偏好：光标不闪 */
-@media (prefers-reduced-motion: reduce) {
-  #typewriter::after {
-    animation: none;
   }
 }
