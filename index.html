@@ -1,27 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>whaylu</title>
-  <style>
-    div {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 20px;
-    }
-  </style>
+  <title>whaylu.github.io</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // 防闪烁：在页面渲染前就把上次选的主题用上
+    (function () {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
 </head>
 <body>
-  <div>
-    <p>ai-musume</p>
-    <a href="https://ai-musume.onrender.com/">https://ai-musume.onrender.com/</a>
-    <a href="https://github.com/whaylu/ai-musume">https://github.com/whaylu/ai-musume</a>
+
+  <!-- 导航栏 -->
+  <header class="navbar">
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="logo" id="logoBtn" data-ds-say="欢迎来到作者的小天地！点击可以回到最顶部哦~">whaylu.github.io</div>
+    <nav>
+      <button class="nav-item" data-target="about">关于</button>
+      <button class="nav-item" data-target="projects">作品</button>
+      <button class="nav-item" data-target="contact">联系</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <!-- 首屏 -->
+  <section class="hero" id="home">
+    <h1 class="reveal">嗨，Whaylu です</h1>
+    <p class="reveal" id="typewriter">撇捺人生皆作游戏，横竖框外天生鬼才</p>
+    <a class="btn reveal" href="#projects" data-ds-say="点这里可以直接滚到精彩的作品列表哦！">看看我的作品</a>
+  </section>
+
+  <!-- 关于 -->
+  <section class="section" id="about">
+    <div class="section-title reveal">
+      <h2>关于我</h2>
+      <span class="section-sub">ABOUT ME</span>
+    </div>
+    <div class="about-card reveal" data-ds-say="偷偷地说：这个作者很懒！">
+      <p>横竖框外的主策划，游弋于代码与哲学之间的造物主。擅长用第一性原理解构系统，只为重新建构。所有零散的兴趣、废弃的代码与陈旧的游戏，都将在这里重生为属于未来的数字宇宙。</p>
+      <div class="about-tags">
+        <span class="tag" data-ds-say="独立开发虽然辛苦，但创造自己的世界真的很有成就感！" data-ds-img="images/ds-hover.png">独立开发</span>
+        <span class="tag" data-ds-say="关于游戏世界观与玩法，作者可是有很多奇思妙想！">游戏设计</span>
+        <span class="tag" data-ds-say="“让一切都为我所用”，作者好像是这么说的。">解构建构</span>
+        <span class="tag" data-ds-say="对于一切的兴趣都是一阵一阵的，但不见得纯是坏事？">自驱依赖</span>
+        <span class="tag" data-ds-say="作者是个调教 AI 的高手呢......" data-ds-img="images/ds-a.png">训仝大师</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 作品 -->
+  <section class="section" id="projects">
+    <div class="section-title reveal">
+      <h2>作品</h2>
+      <span class="section-sub">SELECTED WORKS</span>
+    </div>
+    <div class="cards">
+      <div class="card reveal" data-ds-say="一个属于 AI 们的家，欢迎来参观！" data-ds-img="images/ds-hover.png">
+        <span class="card-num">2026/09</span>
+        <h3>仝娘之家</h3>
+        <p>将主流 AI 大模型拟人化为角色，通过人物图鉴、能力维度评估、术语翻译、模型对比等模块，把抽象的技术信息转化为可浏览、可搜索、可对比的互动式科普体验。</p>
+        <div class="card-links">
+          <a href="https://ai-musume.onrender.com/" target="_blank" rel="noopener noreferrer" class="card-link">网站 &rarr;</a>
+          <a href="https://github.com/whaylu/ai-musume" target="_blank" rel="noopener noreferrer" class="card-link">源码 &rarr;</a>
+        </div>
+      </div>
+
+      <div class="card reveal" data-ds-say="冲排行榜太上头了，感觉知识正无情地涌入我的大脑......" data-ds-img="images/ds-a.png">
+        <span class="card-num">2025/09</span>
+        <h3>原子序塔防</h3>
+        <p>一个基于化学元素性质的塔防游戏，结合了化学元素的各种知识与策略战斗的乐趣。</p>
+        <div class="card-links">
+          <a href="https://whaylu.github.io/aotd" target="_blank" rel="noopener noreferrer" class="card-link">网站 &rarr;</a>
+          <a href="https://github.com/whaylu/aotd" target="_blank" rel="noopener noreferrer" class="card-link">源码 &rarr;</a>
+        </div>
+      </div>
+
+      <div class="card reveal" data-ds-say="展示位保留，敬请期待未来的更多作品！">
+        <span class="card-num">????/??</span>
+        <h3>unknown</h3>
+        <p>不断开发中......</p>
+        <div class="card-links">
+          <a href="" target="_blank" rel="noopener noreferrer" class="card-link">网站 &rarr;</a>
+          <a href="" target="_blank" rel="noopener noreferrer" class="card-link">源码 &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系 -->
+  <section class="section" id="contact">
+    <div class="section-title reveal">
+      <h2>联系我</h2>
+      <span class="section-sub">GET IN TOUCH</span>
+    </div>
+    <div class="contact-card reveal">
+      <p class="contact-intro">如果你对我的作品感兴趣，或者有有趣的想法，欢迎随时来信交流！</p>
+      <div class="email-wrapper" data-ds-say="随时发邮件联系吧！点击右边的按钮可以直接复制地址哦。">
+        <span class="email-address" id="emailText">whaylu@gmail.com</span>
+        <button class="copy-btn" id="copyBtn" onclick="copyEmail()">复制地址</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 whaylu.github.io</p>
+  </footer>
+
+  <!-- 桌寵 -->
+  <div class="pet-layer">
+    <div class="pet-bubble" id="petBubble">你好呀，我是 DeepSeek～</div>
+    <div class="pet" id="pet">
+      <img src="images/ds.png" alt="DeepSeek" id="petImg">
+    </div>
   </div>
-  <div>
-    <p>aotd</p>
-    <a href="https://whaylu.github.io/aotd">https://whaylu.github.io/aotd</a>
-    <a href="https://github.com/whaylu/aotd">https://github.com/whaylu/aotd</a>
-  </div>
+
+  <!-- 回到顶部 -->
+  <button class="back-top" id="backTop" aria-label="回到顶部">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
+  <script src="script.js"></script>
 </body>
 </html>
