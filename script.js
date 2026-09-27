@@ -168,20 +168,6 @@ function copyEmail() {
   });
 }
 
-// ==================== 6. 複製 QQ 號 ====================
-const QQ_NUMBER = '3692374125';   // ← 改成你的 QQ 号
-
-const qqBtn = document.getElementById('qqBtn');
-if (qqBtn) {
-  qqBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(QQ_NUMBER).then(() => {
-      showBubble("QQ 號已複製到剪貼板！", 2500);
-    }).catch(() => {
-      alert("複製失敗，請手動複製：" + QQ_NUMBER);
-    });
-  });
-}
-
 // ==================== 7. 滾動：進度條 + 回頂 + 導航高亮 ====================
 const progressBar = document.getElementById('progressBar');
 const backTop = document.getElementById('backTop');

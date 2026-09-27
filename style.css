@@ -591,7 +591,7 @@ body {
 .pet {
   cursor: pointer;
   user-select: none;
-  transition: transform 0.2s ease;
+  transition: transform 0.1s ease;
   transform-origin: bottom right;
   pointer-events: auto;
 }
@@ -881,7 +881,6 @@ img {
 
   .navbar .logo { font-size: 18px; }
 
-  /* 导航变成从 navbar 下方滑出的面板 */
   .navbar nav {
     position: fixed;
     top: var(--nav-h);
@@ -896,18 +895,18 @@ img {
     border-bottom: 1px solid rgba(184, 137, 74, 0.15);
     box-shadow: 0 20px 40px -12px rgba(90, 60, 40, 0.18);
     z-index: 99;
-    opacity: 0;
+
     visibility: hidden;
-    transform: translateY(-12px);
-    transition: opacity 0.3s ease,
-                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                visibility 0.3s;
+    /* 从底部剪裁 100% → 可见高度为 0，像藏在 navbar 后面 */
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.4s;
   }
 
   .navbar nav.open {
-    opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    /* 完全展开：从 navbar 底边一路"拉"出来 */
+    clip-path: inset(0 0 0 0);
   }
 
   /* resize 期间禁用过渡，防止菜单闪现 */
