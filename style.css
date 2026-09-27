@@ -36,7 +36,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
   -webkit-tap-highlight-color: transparent;
-  background: var(--bg);
+  background: var(--bg-deep);
 }
 
 body {
